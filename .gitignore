@@ -5,9 +5,22 @@
 
 # Compiled Dynamic libraries
 *.so
-*.dylib
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
+
+# Executable files
+read-input
+expand-rollno
+subject-wise-rollno
+strategyValid
+report
+
+# .out files (o/p files of program)
+*.out
+*.txt
+*.pdf
+*.html
+*.csv
