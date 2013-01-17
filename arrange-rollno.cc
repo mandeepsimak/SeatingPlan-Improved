@@ -154,7 +154,7 @@ void ArrangeRollNo :: showArrangedRollNo()
          outfile << subject_code[i][j] << endl;
          outfile << roll_size[i][j] << endl;
          for(k = 0; k < roll_size[i][j]; k++)
-            outfile << roll_no[i][j][k] << " ";
+            outfile << prefix[i][j] << roll_no[i][j][k] << " ";
          outfile << endl;
       }
    }
