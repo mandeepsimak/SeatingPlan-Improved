@@ -144,19 +144,21 @@ void ArrangeRollNo :: showArrangedRollNo()
    }
    outfile.close();
    
-//   outfile.open(Input_Rollno_out);
-//   outfile << total_branches << endl;
-//   for(i = 0; i < total_branches; i++)
-//   {
-//      outfile << branch_name[i] << " ";
-//      for(j = 0; j < total_subject[i]; j++)
-//         outfile << subject_code[i][j];
-//      outfile << " " << roll_size[i] << endl;
-//      for(j = 0; j < roll_size[i][m]; j++)
-//         outfile << roll_no[i][j] << " ";
-//      outfile << endl;
-//   }
-//   outfile.close();
+   outfile.open(Input_Rollno_out);
+   outfile << total_branches << endl;
+   for(i = 0; i < total_branches; i++)
+   {
+      outfile << branch_name[i] << endl << total_subject[i] << endl;
+      for(j = 0; j < total_subject[i]; j++)
+      {
+         outfile << subject_code[i][j] << endl;
+         outfile << roll_size[i][j] << endl;
+         for(k = 0; k < roll_size[i][j]; k++)
+            outfile << roll_no[i][j][k] << " ";
+         outfile << endl;
+      }
+   }
+   outfile.close();
    
 }
 
