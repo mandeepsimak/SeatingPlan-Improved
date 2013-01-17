@@ -190,8 +190,7 @@ void ExapandRollNo :: removeZero()
 
 void ExapandRollNo :: showExpandRollNo()
 {
-//   outfile.open(Rollno_Expand_out);
-   outfile.open("Rollno_Expand_out");
+   outfile.open(Rollno_Expand_out);
    outfile << total_branches << endl;
    for(i = 0; i < total_branches; i++)
    {
