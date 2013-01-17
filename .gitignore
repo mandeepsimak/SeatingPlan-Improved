@@ -16,6 +16,7 @@ read-input
 expand-rollno
 subject-wise-rollno
 strategyValid
+arrange-rollno
 report
 
 # .out files (o/p files of program)
