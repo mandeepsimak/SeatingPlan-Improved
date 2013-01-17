@@ -1,34 +1,60 @@
 #include "expand-rollno.h"
 
-void ExapandRollNo :: expandInput()
-{
-   readRoomsInput(Input_Rooms);
-   readRollNoInput(Input_Rollno);
-   readSubjectCode(Input_SubjectCode);
-}
+//void ExapandRollNo :: expandInput()
+//{
+//   readBranchDetails(Input_BranchDetails);
+//   readRoomsInput(Input_Rooms);
+//   readRollNoInput(Input_Rollno);
+//}
 
 void ExapandRollNo :: addSeperator()
 {
    string a="0";
    
-   for(j = 0; j < total_branches; j++)
+   for(i = 0; i < total_branches; i++)
    {
-      int size = string_rollno[j].size() + 1;
-      char largchar[size]; // = roll[i].c_str();//"1-10 12 34 15 20 25-30";
-      
-      strcpy(largchar, string_rollno[j].c_str());
-      char* chars_array = strtok(largchar, " ");
-      a="0";
-      while(chars_array)
+      for(j = 0; j < total_subject[i]; j++)
       {
-         if(chars_array!="-")
-         {
-            a.append(",");
-            a.append(chars_array);//atoi (chars_array));//n++;
+        { // adding seperratotr in rollno
+            int size = string_rollno[i][j].size() + 1;
+            char largchar[size]; // = roll[i].c_str();//"1-10 12 34 15 20 25-30";
+            
+            strcpy(largchar, string_rollno[i][j].c_str());
+            char* chars_array = strtok(largchar, " ");
+            a="0";
+            while(chars_array)
+            {
+               if(chars_array!="-")
+                  {
+                  a.append(",");
+                  a.append(chars_array);//atoi (chars_array));//n++;
+               }
+               chars_array = strtok(NULL, " ");
+            }
+            string_rollno[i][j] = a;
          }
-         chars_array = strtok(NULL, " ");
+         
+         // adding seperratotr in not included roll nos.
+         if(str_not_included_rollno[i][j].compare("0") != 0)
+         {
+            int size = str_not_included_rollno[i][j].size() + 1;
+            char largchar[size]; // = roll[i].c_str();//"1-10 12 34 15 20 25-30";
+            
+            strcpy(largchar, str_not_included_rollno[i][j].c_str());
+            char* chars_array = strtok(largchar, " ");
+            a="0";
+            while(chars_array)
+            {
+               if(chars_array!="-")
+               {
+                  a.append(",");
+                  a.append(chars_array);//atoi (chars_array));//n++;
+               }
+               chars_array = strtok(NULL, " ");
+            }
+            str_not_included_rollno[i][j] = a;
+         }
       }
-      string_rollno[j] = a;
    }
 }
 
@@ -36,22 +62,44 @@ void ExapandRollNo :: expandRollNo()//string rollno)
 {
    outfile.open(Rollno_Expand_out);
    
+   // expanding roll nos
    for(i = 0; i < total_branches; i++)
    {
-      istringstream rollno(string_rollno[i]);
-      deque<int> v;
-      
-      bool success = expandRollNumberList(rollno, back_inserter(v));
-      
-      if (success)
+      for(j = 0; j < total_subject[i]; j++)
       {
-         roll_size[i] = v.size()-1;
-         copy(v.begin(), v.end()-1, ostream_iterator<int>(outfile, " "));
-
-         outfile << v.back() << endl;
+         istringstream rollno(string_rollno[i][j]);
+         deque<int> v;
+         
+         bool success = expandRollNumberList(rollno, back_inserter(v));
+         
+         if (success)
+         {
+            roll_size[i][j] = v.size()-1;
+            copy(v.begin(), v.end()-1, ostream_iterator<int>(outfile, " "));
+   
+            outfile << v.back() << endl;
+            }
+         else
+            outfile << "an error occured." << endl;
+            
+         // expanding not included roll nos
+         {
+            istringstream rollno(str_not_included_rollno[i][j]);
+            deque<int> v;
+            
+            bool success = expandRollNumberList(rollno, back_inserter(v));
+            
+            if (success)
+            {
+               not_roll_size[i][j] = v.size()-1;
+               copy(v.begin(), v.end()-1, ostream_iterator<int>(outfile, " "));
+      
+               outfile << v.back() << endl;
+            }
+            else
+               outfile << "an error occured." << endl;
+         }
       }
-      else
-         outfile << "an error occured." << endl;
    }
    outfile.close();
 }
@@ -109,39 +157,68 @@ void ExapandRollNo :: removeZero()
    
    for(i = 0; i < total_branches; i++)
    {
-      for(j = 0; j < roll_size[i] + 1; j++)
-         infile >> roll_no[i][j];
+      for(j = 0; j < total_subject[i]; j++)
+      {
+         for(k = 0; k < roll_size[i][j] + 1; k++)
+            infile >> roll_no[i][j][k];
+            
+         for(k = 0; k < not_roll_size[i][j] + 1; k++)
+            infile >> not_roll_no[i][j][k];
+      }
    }
    
    infile.close();
    
    for(i = 0; i < total_branches; i++)
    {
-      for(j=0; j < roll_size[i]-1; j++)
+      for(j = 0; j < total_subject[i]; j++)
       {
-         roll_no[i][j] = roll_no[i][j+1];
+         for(k = 0; k < roll_size[i][j]; k++)
+         {
+            roll_no[i][j][k] = roll_no[i][j][k+1];
+         }
+//         roll_size[i][j]--;
+         
+         for(k = 0; k < not_roll_size[i][j]; k++)
+         {
+            not_roll_no[i][j][k] = not_roll_no[i][j][k+1];
+         }
+//         not_roll_size[i][j]--;
       }
-      roll_size[i]--;
    }
 }
 
 void ExapandRollNo :: showExpandRollNo()
 {
-   outfile.open(Rollno_Expand_out);
+//   outfile.open(Rollno_Expand_out);
+   outfile.open("Rollno_Expand_out");
    outfile << total_branches << endl;
    for(i = 0; i < total_branches; i++)
    {
-      outfile << roll_size[i] << endl;
-      for(j = 0; j < roll_size[i]; j++)
-         outfile << roll_no[i][j] << " ";
-      outfile << endl;
+      for(j = 0; j < total_subject[i]; j++)
+      {
+         outfile << roll_size[i][j] << endl;
+         for(k = 0; k < roll_size[i][j]; k++)
+            outfile << roll_no[i][j][k] << " ";
+         outfile << endl;
+         
+         outfile << not_roll_size[i][j] << endl;
+         
+         if(not_roll_size[i][j] != 0)
+         {  
+            for(k = 0; k < not_roll_size[i][j]; k++)
+               outfile << not_roll_no[i][j][k] << " ";
+            outfile << endl;
+         }
+         
+      }
    }
    outfile.close();
 }
 
 void ExapandRollNo :: Main()
 {
-   expandInput();
+   ReadInput :: Main();
    addSeperator();
    expandRollNo();
    removeZero();
