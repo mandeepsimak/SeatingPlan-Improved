@@ -2,11 +2,23 @@
 
 void SubjectWiseRollNo :: setSubCode()
 {
-   // Putting values of subject code into another array set_subcode
-   for(int i = 0; i < total_branches; i++)
+   subject_size = 0;
+   for(i = 0; i < total_branches; i++)
    {
-      for(int j = 0; j < total_subject[i]; j++)
-         set_subcode[i] = subject_code[i][j];
+      subject_size += total_subject[i];
+   }
+   i = 0;
+   // Putting values of subject code into another array set_subcode
+   //for(i = 0; i < subject_size; i++)
+   {
+      for(j = 0; j < total_branches; j++)
+      {
+         for(k = 0; k < total_subject[j]; k++)
+          {
+            set_subcode[i] = subject_code[j][k];
+            i++;
+         }
+      }
    }
     
 }
@@ -52,11 +64,11 @@ void SubjectWiseRollNo :: subjectWiseRollNo()
          {
             if(set_subcode[j] == subject_code[i][l])
             {
-               for(k = 0; k < roll_size[i]; k++)
+               for(k = 0; k < roll_size[i][l]; k++)
                {
-                  set_rollno[j][(k + set_totalrno[j])] = roll_no[i][k];
+                  set_rollno[j][(k + set_totalrno[j])] = roll_no[i][l][k];
                }
-               set_totalrno[j] += roll_size[i];
+               set_totalrno[j] += roll_size[i][l];
             }
          }
       }
