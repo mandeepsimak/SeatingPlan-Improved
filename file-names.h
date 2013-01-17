@@ -9,7 +9,7 @@ const char Checking[FILE_SIZE] = "Checking.txt";
 // Input Files
 //string Input_Rollno = "rollno.in";
 const char Input_Rollno[FILE_SIZE] = "rollno.in";
-const char Input_SubjectCode[FILE_SIZE] = "subjectcode.in";
+const char Input_BranchDetails[FILE_SIZE] = "branchdetails.in";
 const char Input_Rooms[FILE_SIZE] = "rooms.in";
 
 // Roll no Processing 
