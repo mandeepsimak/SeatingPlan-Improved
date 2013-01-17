@@ -13,11 +13,11 @@ SUBJECTWISE_ROLLNO_HEADER = subject-wise-rollno.h $(ARRANGE_ROLLNO_HEADER)
 INPUT = rollno.in rooms.in branchdetails.in # input files
 READ_INPUT = read-input.o #Sread-input-main.o # read-input obj files
 EXPAND_ROLLNO = $(READ_INPUT) expand-rollno.o #expand-rollno-main.o
-ARRANGE_ROLLNO = $(EXPAND_ROLLNO) arrange-rollno.o arrange-rollno-main.o
+ARRANGE_ROLLNO = $(EXPAND_ROLLNO) arrange-rollno.o #arrange-rollno-main.o
 SUBJECTWISE_ROLLNO = $(ARRANGE_ROLLNO) subject-wise-rollno.o subject-wise-rollno-main.o
 
 # All Targets
-all: arrange-rollno-run
+all: subject-wise-rollno-run
 #expand-rollno-run
 #subject-wise-rollno-run
 # arrange-rollno-run
