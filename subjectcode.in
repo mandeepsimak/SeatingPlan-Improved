@@ -1,14 +1,43 @@
-INF.TECH 1 IT-101
-IT 1 ME-101
-CSE 1 CSE-133
-MechE 1 ECE-111
-PE 1 ME-101
-EE 1 IT-102
-IT1 1 ME-101
-H   1 ECE-111
-I 1 ME-101
-J 1 IT-102
-K 1 ME-102
-L 1 CSE-134
-M 1 ME-101
-N 1 CSE-133
+INF.TECH 
+2 
+IT-101
+IT-201
+IT 
+1 
+ME-101
+CSE 
+1 
+CSE-133
+MechE 
+1 
+ECE-111
+PE 
+1 
+ME-101
+EE 
+1 
+IT-102
+IT1 
+1 
+ME-101
+Branch 1  
+1 
+ECE-111
+Branch 2
+1 
+ME-101
+Branch 3
+1 
+IT-102
+Branch 4
+1 
+ME-102
+Branch 5
+1 
+CSE-134
+Branch 6
+1 
+ME-101
+Branch 7
+1 
+CSE-133
