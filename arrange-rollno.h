@@ -3,13 +3,13 @@
 class ArrangeRollNo : public ExapandRollNo
 {
    protected:
-      int rno[MAX_SIZE], l;
+      int rno[MAX_SIZE], l, m;
    
    public:
    
 //      void arrangeInput();
-      void readRollNoRow(int);
-      void setRollNoRow(int);
+      void readRollNoRow(int, int);
+      void setRollNoRow(int, int);
       void sortRollNo();
       void removeRedundancy();
       void removeNonEligibleRollNo();
