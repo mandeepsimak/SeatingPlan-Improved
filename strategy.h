@@ -1,14 +1,14 @@
-#include "subject-wise-rollno.h"
+#include "seatplan.h"
 
-class Strategy : public SubjectWiseRollNo
+class Strategy : public SeatPlan
 {
     protected:
-        int total_seats, total_students, room_size[MIN_SIZE][MIN_SIZE],
-            strategy_choice, total_group_seats, temp[MIN_SIZE], 
-            index_value[MIN_SIZE], group_student_size[MIN_SIZE];
-            
-        // temp
-        int s;
+//        int total_seats, total_students, room_size[MIN_SIZE][MIN_SIZE],
+//            strategy_choice, total_group_seats, temp[MIN_SIZE], 
+//            index_value[MIN_SIZE], group_student_size[MIN_SIZE];
+//            
+//        // temp
+//        int s;
     
     public:
         

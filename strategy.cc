@@ -116,7 +116,10 @@ void Strategy :: groupCondition(int strategy)
         
     }
     else
+    {
         cout << "\t condition is valid" << endl;
+        seatingPlan(strategy);
+    }
 }
 
 void Strategy :: checkValidation(int strategy)

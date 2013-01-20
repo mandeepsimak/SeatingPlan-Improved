@@ -2,8 +2,8 @@
 
 int main(void)
 {
-    Strategy strategy;
-    strategy.Main();
+    Strategy st;
+    st.Main();
     
     return 0;
 }
