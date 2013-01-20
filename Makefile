@@ -8,7 +8,7 @@ READ_INPUT_HEADER = read-input.h $(HEADER)
 EXPAND_ROLLNO_HEADER = expand-rollno.h $(READ_INPUT_HEADER)
 ARRANGE_ROLLNO_HEADER = arrange-rollno.h $(EXPAND_ROLLNO_HEADER)
 SUBJECTWISE_ROLLNO_HEADER = subject-wise-rollno.h $(ARRANGE_ROLLNO_HEADER)
-SEATPLAN_HEADER = seatplan.h $(SUBJECTWISE_ROLLNO_HEADER)
+SEATPLAN_HEADER = seatplan.h $(HEADER)
 STRATEGY_HEADER = strategy.h $(SEATPLAN_HEADER)
 
 ## Temp
@@ -21,8 +21,8 @@ INPUT = rollno.in rooms.in branchdetails.in # input files
 READ_INPUT = read-input.o #Sread-input-main.o # read-input obj files
 EXPAND_ROLLNO = $(READ_INPUT) expand-rollno.o #expand-rollno-main.o
 ARRANGE_ROLLNO = $(EXPAND_ROLLNO) arrange-rollno.o #arrange-rollno-main.o
-SUBJECTWISE_ROLLNO = $(ARRANGE_ROLLNO) subject-wise-rollno.o #subject-wise-rollno-main.o
-SEATPLAN = $(SUBJECTWISE_ROLLNO) seatplan.o
+SUBJECTWISE_ROLLNO = $(ARRANGE_ROLLNO) subject-wise-rollno.o subject-wise-rollno-main.o
+SEATPLAN = seatplan.o
 STRATEGY = $(SEATPLAN) strategy.o strategy-main.o
 
 ## Temp
@@ -30,7 +30,7 @@ STRATEGY = $(SEATPLAN) strategy.o strategy-main.o
 #REPORT = report.o report_main.o
 
 # All Targets
-all: strategy-run
+all: subject-wise-rollno-run strategy-run
 #subject-wise-rollno-run
 #expand-rollno-run
 #subject-wise-rollno-run
@@ -129,6 +129,6 @@ strategy-run: $(INPUT) strategy
 #run_report: report
 #	./report
 clean:
-	rm -f *.o *.out *.txt read-input expand-rollno arrange-rollno subject-wise-rollno 
+	rm -f *.o *.out *.txt read-input expand-rollno arrange-rollno subject-wise-rollno strategy
 	
 #	*.html *.pdf *.csv report strategyValid

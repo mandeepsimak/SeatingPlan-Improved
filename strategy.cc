@@ -67,14 +67,14 @@ void Strategy :: totalGroupStudents(int strategy)
                
     }
     sort(group_student_size, group_student_size + strategy);
- /*   
-    for(i = 0; i < strategy; i++)
+    
+/*    for(i = 0; i < strategy; i++)
     {
         cout << " grp size " 
-             << group_size[i][0] << endl;
+             << group_student_size[i] << endl;
     }
     
-    // displaying sorted array
+     displaying sorted array
     for(i = 0; i < total_code; i++)
     {
         cout << sub_totalrno[i] << "\t" << i << endl;
@@ -87,8 +87,8 @@ void Strategy :: totalGroupStudents(int strategy)
         cout << temp[i] << "\t" << i << "\t" << sub_totalrno[index_value[i]] << "\t";
         cout << index_value[i] << "\t" << endl;
     }
-*/
-    
+
+  */  
 }
 
 void Strategy :: groupCondition(int strategy)
@@ -191,6 +191,8 @@ void Strategy :: chooseStrategy()
 
 void Strategy :: Main()
 {
-    SubjectWiseRollNo :: Main();
+    readSubjectWiseRollNo(Subjectwise_Rollno_out);
+    readRoomDetails(Input_Rooms);
     chooseStrategy();
+    showSeatPlan();
 }
