@@ -26,19 +26,114 @@ void Strategy :: totalStudents()
     }
 }
 
+void Strategy :: totalGroupStudents(int strategy)
+{
+    s = 0;
+    for(i = 0; i < total_code; i++)
+    {
+        temp[i] = sub_totalrno[i];
+        index_value[i] = 0;
+    }
+    
+    for(i = 0; i < strategy; i++)
+    {
+        group_student_size[i] = 0;
+    }
+    
+    sort(temp, temp + total_code);
+    
+    for(i = 0; i < total_code; i++)
+    {
+        for(j = 0; j < total_code; j++)
+        {
+            if(temp[j] == sub_totalrno[i])
+            {
+                if(index_value[j] == 0)
+                {
+                    index_value[j] = i;
+                    break;
+                }
+                
+            }
+        }
+    }
+    
+    for(i = 0; i < total_code; i++)
+    {
+        if(s == strategy)
+            s = 0;
+        group_student_size[s] += sub_totalrno[index_value[i]];
+        s++;
+               
+    }
+    sort(group_student_size, group_student_size + strategy);
+ /*   
+    for(i = 0; i < strategy; i++)
+    {
+        cout << " grp size " 
+             << group_size[i][0] << endl;
+    }
+    
+    // displaying sorted array
+    for(i = 0; i < total_code; i++)
+    {
+        cout << sub_totalrno[i] << "\t" << i << endl;
+    }
+    
+    cout << endl;
+    
+    for(i = 0; i < total_code; i++)
+    {
+        cout << temp[i] << "\t" << i << "\t" << sub_totalrno[index_value[i]] << "\t";
+        cout << index_value[i] << "\t" << endl;
+    }
+*/
+    
+}
+
+void Strategy :: groupCondition(int strategy)
+{
+    if(group_student_size[strategy-1] > total_group_seats)
+    {
+        int extra = (group_student_size[strategy-1] - total_group_seats);
+        
+        for(i = 0; i < total_centres; i++)
+        {
+            for(j = 0; j < total_rooms[i]; j++)
+            {
+                if((room_size[i][j] / strategy) > extra)
+                {    
+                    //extra = room_size[i][j] / strategy;
+                    cout << "\t condition in valid" << endl
+                         << "Add " <<  extra << " seats  (" << rows[i][j]
+                         << " * " << cols[i][j] << " "
+                         << " room)" << endl;
+                    break;
+                }
+            }
+        }
+        
+        
+    }
+    else
+        cout << "\t condition is valid" << endl;
+}
+
 void Strategy :: checkValidation(int strategy)
 {
     totalSeats(strategy);
     totalStudents();
+    totalGroupStudents(strategy);
     
     cout << "\n\t Total Seats = " << total_seats << endl
          << "\t Total Students = " << total_students << endl
-         << "\t Total Group Seats = " << total_group_seats;
+         << "\t Total Group Seats = " << total_group_seats << endl
+         << "\t Max Group Students = " << group_student_size[strategy-1] << endl;
     
     if(total_seats < total_students)
         cout << "\t Add More rooms!" << endl;
     else
-        cout << "\n \t Condition Valid" << endl;
+        groupCondition(strategy);
 }
         
 void Strategy :: chooseStrategy()
