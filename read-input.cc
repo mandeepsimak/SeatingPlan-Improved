@@ -46,9 +46,10 @@ void ReadInput :: readBranchDetails(string file)
    {
       getline(infile, branch_name[i], '\n');
       infile >> total_subject[i];
-      getline(infile, subject_code[i][0], '\n');   
+      getline(infile, subject_name[i][0], '\n');   
       for(j = 0; j < total_subject[i]; j++)
       {
+         getline(infile, subject_name[i][j], '\n');
          getline(infile, subject_code[i][j], '\n');
       }
    }

@@ -4,6 +4,7 @@ class ArrangeRollNo : public ExapandRollNo
 {
    protected:
       int rno[MAX_SIZE], l, m;
+      string prefix_roll_no[MIN_SIZE][MIN_SIZE][MAX_SIZE];
    
    public:
    
@@ -13,6 +14,7 @@ class ArrangeRollNo : public ExapandRollNo
       void sortRollNo();
       void removeRedundancy();
       void removeNonEligibleRollNo();
+      void addPrefixWithRollNo();
       void showArrangedRollNo();
       void Main();
 };

@@ -8,14 +8,14 @@ void SubjectWiseRollNo :: setSubCode()
       subject_size += total_subject[i];
    }
    i = 0;
-   // Putting values of subject code into another array set_subcode
+   // Putting values of subject code into another array sub_subcode
    //for(i = 0; i < subject_size; i++)
    {
       for(j = 0; j < total_branches; j++)
       {
          for(k = 0; k < total_subject[j]; k++)
           {
-            set_subcode[i] = subject_code[j][k];
+            sub_subcode[i] = subject_code[j][k];
             i++;
          }
       }
@@ -25,18 +25,18 @@ void SubjectWiseRollNo :: setSubCode()
 
 void SubjectWiseRollNo :: removeRedundantSubCode()
 {
-   // Removing redundancy from set_subcode array
+   // Removing redundancy from sub_subcode array
    total_code = total_branches;
        
    for(k = 0; k < total_code; k++)
    {
       for(i = k+1; i < total_code; i++)
       {
-         if(set_subcode[i] == set_subcode[k])
+         if(sub_subcode[i] == sub_subcode[k])
          {
             for(j = i; j < total_code; j++)
             {
-               set_subcode[j] = set_subcode[j+1];   
+               sub_subcode[j] = sub_subcode[j+1];   
             }
             total_code--;  
          }
@@ -52,7 +52,7 @@ void SubjectWiseRollNo :: subjectWiseRollNo()
        
    for(i = 0; i < total_code; i++)
    {
-      set_totalrno[i] = 0;
+      sub_totalrno[i] = 0;
    }
     
    // Adding roll nos
@@ -62,13 +62,13 @@ void SubjectWiseRollNo :: subjectWiseRollNo()
       {
          for(l = 0; l < total_subject[i]; l++)
          {
-            if(set_subcode[j] == subject_code[i][l])
+            if(sub_subcode[j] == subject_code[i][l])
             {
                for(k = 0; k < roll_size[i][l]; k++)
                {
-                  set_rollno[j][(k + set_totalrno[j])] = roll_no[i][l][k];
+                  sub_rollno[j][(k + sub_totalrno[j])] = prefix_roll_no[i][l][k];
                }
-               set_totalrno[j] += roll_size[i][l];
+               sub_totalrno[j] += roll_size[i][l];
             }
          }
       }
@@ -80,13 +80,13 @@ void SubjectWiseRollNo :: showSubjectWiseRollNo()
 {
    outfile.open(Subjectwise_Rollno_out);
    outfile << total_code << endl;
-   for(i = 0; i < total_code; i++)//SizeOfArray(set_rollno)
+   for(i = 0; i < total_code; i++)//SizeOfArray(sub_rollno)
    {
-      //        outfile<<'\n'<<set_subcode[i]<<endl;
-      outfile << set_subcode[i] << " " << set_totalrno[i] << ' ';
+      //        outfile<<'\n'<<sub_subcode[i]<<endl;
+      outfile << sub_subcode[i] << endl << sub_totalrno[i] << ' ';
       
-      for(j = 0; j < set_totalrno[i]; j++)//SizeOfArray(set_rollno[0])
-         outfile<<set_rollno[i][j]<<"\t";
+      for(j = 0; j < sub_totalrno[i]; j++)//SizeOfArray(sub_rollno[0])
+         outfile<<sub_rollno[i][j]<<"\t";
       outfile<<endl;
    }
    outfile.close();

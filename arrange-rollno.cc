@@ -128,6 +128,22 @@ void ArrangeRollNo :: removeNonEligibleRollNo()
 //   }
 }
 
+void ArrangeRollNo :: addPrefixWithRollNo()
+{
+   for(i = 0; i < total_branches; i++)
+   {
+      for(j = 0; j < total_subject[i]; j++)
+      {
+         for(k = 0; k < roll_size[i][j]; k++)
+         {
+            std::stringstream srno;
+            srno << roll_no[i][j][k];
+            prefix_roll_no[i][j][k] = prefix[i][j] + srno.str();
+         }
+      }
+   }
+}
+
 void ArrangeRollNo :: showArrangedRollNo()
 {
    outfile.open(Rollno_Arranged_out);
@@ -138,7 +154,7 @@ void ArrangeRollNo :: showArrangedRollNo()
       {
          outfile << roll_size[i][j] << endl;
          for(k = 0; k < roll_size[i][j]; k++)
-            outfile << roll_no[i][j][k] << " ";
+            outfile << prefix_roll_no[i][j][k] << " ";
          outfile << endl;
       }
    }
@@ -151,10 +167,11 @@ void ArrangeRollNo :: showArrangedRollNo()
       outfile << branch_name[i] << endl << total_subject[i] << endl;
       for(j = 0; j < total_subject[i]; j++)
       {
+         outfile << subject_name[i][j] << endl;
          outfile << subject_code[i][j] << endl;
          outfile << roll_size[i][j] << endl;
          for(k = 0; k < roll_size[i][j]; k++)
-            outfile << prefix[i][j] << roll_no[i][j][k] << " ";
+            outfile << prefix_roll_no[i][j][k] << " ";
          outfile << endl;
       }
    }
@@ -168,5 +185,6 @@ void ArrangeRollNo :: Main()
    sortRollNo();
    removeRedundancy();
    removeNonEligibleRollNo();
+   addPrefixWithRollNo();
    showArrangedRollNo();
 }

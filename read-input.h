@@ -19,7 +19,7 @@ class ReadInput
       
       // Subject Code Variables
       int total_subject[MIN_SIZE];
-      string subject_code[MIN_SIZE][MIN_SIZE];
+      string subject_code[MIN_SIZE][MIN_SIZE], subject_name[MIN_SIZE][MIN_SIZE];
       
       // Loop variables
       int i, j, k;

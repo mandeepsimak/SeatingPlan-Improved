@@ -43,7 +43,7 @@ const char BranchReport_HTMLFile[FILE_SIZE] = "branch_report.html";*/
 // used in strategyVal programs
 
 const char strategyResults[25] = "strategyResults.txt";
-const char FinalAllotment_out[25] = "FinalAllotment.out";
+const char Seat_Plan_out[25] = "Seat-Plan.out";
 
 // Report Files
 
