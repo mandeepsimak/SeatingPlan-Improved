@@ -15,7 +15,7 @@
 read-input
 expand-rollno
 subject-wise-rollno
-strategyValid
+strategy
 arrange-rollno
 report
 
